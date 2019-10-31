@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Websanova :: Paint</title>
+
+  <script type="text/javascript" src="../lib/jquery.1.10.2.min.js"></script>
+</head>
+<body>
+  <!-- jQuery UI -->
+  <script type="text/javascript" src="../lib/jquery.ui.core.1.10.3.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.widget.1.10.3.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.mouse.1.10.3.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.draggable.1.10.3.min.js"></script>
+  
+  <!-- wColorPicker -->
+  <link rel="Stylesheet" type="text/css" href="../lib/wColorPicker.min.css" />
+  <script type="text/javascript" src="../lib/wColorPicker.min.js"></script>
+
+  <!-- wPaint -->
+  <link rel="Stylesheet" type="text/css" href="../src/wPaint.css" />
+  <script type="text/javascript" src="../src/wPaint.utils.js"></script>
+  <script type="text/javascript" src="../src/wPaint.js"></script>
+
+  <!-- wPaint main -->
+  <script type="text/javascript" src="../plugins/main/src/fillArea.min.js"></script>
+  <script type="text/javascript" src="../plugins/main/src/wPaint.menu.main.js"></script>
+
+  <!-- wPaint text -->
+  <script type="text/javascript" src="../plugins/text/src/wPaint.menu.text.js"></script>
+
+  <!-- wPaint shapes -->
+  <script type="text/javascript" src="../plugins/shapes/src/shapes.min.js"></script>
+  <script type="text/javascript" src="../plugins/shapes/src/wPaint.menu.main.shapes.js"></script>
+
+  <!-- wPaint file -->
+  <script type="text/javascript" src="../plugins/file/src/wPaint.menu.main.file.js"></script>
+
+  <div id="wPaint" style="position:relative; width:200px; height:200px; background:#CACACA;"></div>
+
+  <style>
+    body, html {
+      margin: 0px;
+      overflow: hidden;
+    }
+  </style>
+
+  <script type="text/javascript">
+
+    // update elements dimensions
+    // call wPaint('resize')
+    $(window).resize(function () {
+      $('#wPaint').css({
+        width: $(window).width(),
+        height: $(window).height()
+      })
+      .wPaint('resize');
+    })
+    
+    // init size based on browser dimensions
+    $(window).resize();
+
+    // set test image
+    // get from tapping enter below
+    $('#wPaint').wPaint({
+      path:            '/wPaint/',                // set absolute path for images and cursors
+  theme:           'standard classic', // set theme
+  autoScaleImage:  true,               // auto scale images to size of canvas (fg and bg)
+  autoCenterImage: true,               // auto center images (fg and bg, default is left/top corner)
+  menuHandle:      true,               // setting to false will means menus cannot be dragged around
+  menuOrientation: 'horizontal',       // menu alignment (horizontal,vertical)
+  menuOffsetLeft:  5,                  // left offset of primary menu
+  menuOffsetTop:   5,                  // top offset of primary menu
+  bg:              null,               // set bg on init
+  image:           null,               // set image on init
+  imageStretch:    false,              // stretch smaller images to full canvans dimensions
+  onShapeDown:     null,               // callback for draw down event
+  onShapeMove:     null,               // callback for draw move event
+  onShapeUp:       null       
+    });
+    $('#wPaint').wPaint('cursor', 'rocket');
+
+    // get an image for testing (just tap enter key)
+    $(document).keypress(function (e) {
+      if (e.keyCode === 13) {
+        console.log($('#wPaint').wPaint('image'));
+      }
+    });
+  </script>
+</body>
+</html>
