@@ -45,7 +45,8 @@ if(!empty($signatory_id)){
 
 // get sequence no of the approver
 $sequence_no = $approver->getApproverSequence($trip_ticket_no,$approver_id);
-if($sequence_no == $approver_count){ // it means that this is the last approver
+if($sequence_no == 2){ // if CSS MANAGER
+//if($sequence_no == $approver_count){ // it means that this is the last approver
 	$trip_ticket->updateTripTicketStatus($trip_ticket_no,1); // 1 means = Open Trip / Refer to Trip Status Table
 	$vehicle->updateVehicleStatus($trip_ticket_details->vehicle_id,0); // tag the vehicle as unavailable
 }
